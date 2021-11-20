@@ -4,13 +4,14 @@
 #
 Name     : pyspnego
 Version  : 0.3.1
-Release  : 1
+Release  : 2
 URL      : https://files.pythonhosted.org/packages/e1/0c/17cb3853089ac70c00095a553773839936a9265afe90919c934322feeaba/pyspnego-0.3.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/e1/0c/17cb3853089ac70c00095a553773839936a9265afe90919c934322feeaba/pyspnego-0.3.1.tar.gz
 Summary  : Windows Negotiate Authentication Client and Server
 Group    : Development/Tools
 License  : MIT
 Requires: pyspnego-bin = %{version}-%{release}
+Requires: pyspnego-license = %{version}-%{release}
 Requires: pyspnego-python = %{version}-%{release}
 Requires: pyspnego-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
@@ -26,9 +27,18 @@ BuildRequires : pypi(cryptography)
 %package bin
 Summary: bin components for the pyspnego package.
 Group: Binaries
+Requires: pyspnego-license = %{version}-%{release}
 
 %description bin
 bin components for the pyspnego package.
+
+
+%package license
+Summary: license components for the pyspnego package.
+Group: Default
+
+%description license
+license components for the pyspnego package.
 
 
 %package python
@@ -60,7 +70,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1637368424
+export SOURCE_DATE_EPOCH=1637369299
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -75,6 +85,8 @@ python3 setup.py build
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/pyspnego
+cp %{_builddir}/pyspnego-0.3.1/LICENSE %{buildroot}/usr/share/package-licenses/pyspnego/2b1b1a0652626080334be38bf79eba5da489acee
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -86,6 +98,10 @@ echo ----[ mark ]----
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/pyspnego-parse
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/pyspnego/2b1b1a0652626080334be38bf79eba5da489acee
 
 %files python
 %defattr(-,root,root,-)
