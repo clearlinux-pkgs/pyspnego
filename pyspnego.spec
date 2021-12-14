@@ -4,7 +4,7 @@
 #
 Name     : pyspnego
 Version  : 0.3.1
-Release  : 2
+Release  : 3
 URL      : https://files.pythonhosted.org/packages/e1/0c/17cb3853089ac70c00095a553773839936a9265afe90919c934322feeaba/pyspnego-0.3.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/e1/0c/17cb3853089ac70c00095a553773839936a9265afe90919c934322feeaba/pyspnego-0.3.1.tar.gz
 Summary  : Windows Negotiate Authentication Client and Server
